@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -17,12 +18,17 @@ import retrofit2.Retrofit;
 
 public class BoardListActivity extends AppCompatActivity {
     private RecyclerView rvList;
+    private BoardListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_board_list);
+        adapter = new BoardListAdapter();
+
         rvList = findViewById(R.id.rvList);
+        rvList.setAdapter(adapter);
+
         getBoardList();
     }
 
@@ -35,10 +41,8 @@ public class BoardListActivity extends AppCompatActivity {
             public void onResponse(Call<List<BoardVO>> call, Response<List<BoardVO>> res) {
                 if(res.isSuccessful()) {
                     List<BoardVO> result = res.body();
-
-                    for(BoardVO vo : result) {
-                        Log.i("myLog", vo.getIboard() + ", " + vo.getTitle());
-                    }
+                    adapter.setList(result);
+                    adapter.notifyDataSetChanged();
                 } else {
                     Log.e("myLog", "통신 오류 : " + res.code());
                 }
@@ -62,17 +66,21 @@ class BoardListAdapter extends RecyclerView.Adapter<BoardListAdapter.MyViewHolde
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        LayoutInflater li = LayoutInflater.from(parent.getContext());
+        View v = li.inflate(R.layout.item_board, parent,false);
+        MyViewHolder viewHolder = new MyViewHolder(v);
+        return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-
+        BoardVO vo = list.get(position);
+        holder.setItem(vo);
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return list == null ? 0 : list.size();
     }
 
     static class MyViewHolder extends RecyclerView.ViewHolder {
@@ -90,7 +98,10 @@ class BoardListAdapter extends RecyclerView.Adapter<BoardListAdapter.MyViewHolde
         }
 
         public void setItem(BoardVO param) {
-
+            tvIboard.setText(String.valueOf(param.getIboard()));
+            tvTitle.setText(param.getTitle());
+            tvWriter.setText(param.getWriter());
+            tvRdt.setText(param.getRdt());
         }
     }
 }

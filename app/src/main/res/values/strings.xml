@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">board</string>
+    <string name="write">글쓰기</string>
+    <string name="title">제목</string>
+    <string name="ctnt">내용</string>
+    <string name="writer">작성자</string>
 </resources>

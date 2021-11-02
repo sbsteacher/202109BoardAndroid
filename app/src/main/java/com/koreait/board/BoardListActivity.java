@@ -3,6 +3,8 @@ package com.koreait.board;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -32,6 +34,12 @@ public class BoardListActivity extends AppCompatActivity {
         getBoardList();
     }
 
+    //글쓰기 Activity로 이동
+    public void clkWrite(View v) {
+        Intent intent = new Intent(this, BoardWriteActivity.class);
+        startActivity(intent);
+    }
+
     private void getBoardList() {
         Retrofit retrofit = RetroFitObj.getInstance();
         BoardService service = retrofit.create(BoardService.class);
@@ -54,6 +62,8 @@ public class BoardListActivity extends AppCompatActivity {
             }
         });
     }
+
+
 }
 
 class BoardListAdapter extends RecyclerView.Adapter<BoardListAdapter.MyViewHolder> {

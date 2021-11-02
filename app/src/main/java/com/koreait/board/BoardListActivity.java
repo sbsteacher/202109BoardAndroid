@@ -1,9 +1,13 @@
 package com.koreait.board;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.List;
 import retrofit2.Call;
@@ -45,5 +49,48 @@ public class BoardListActivity extends AppCompatActivity {
                 Log.e("myLog", "통신 자체 실패");
             }
         });
+    }
+}
+
+class BoardListAdapter extends RecyclerView.Adapter<BoardListAdapter.MyViewHolder> {
+    private List<BoardVO> list;
+
+    public void setList(List<BoardVO> list) {
+        this.list = list;
+    }
+
+    @NonNull
+    @Override
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return null;
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+
+    }
+
+    @Override
+    public int getItemCount() {
+        return 0;
+    }
+
+    static class MyViewHolder extends RecyclerView.ViewHolder {
+        private TextView tvIboard;
+        private TextView tvTitle;
+        private TextView tvWriter;
+        private TextView tvRdt;
+
+        public MyViewHolder(View v) {
+            super(v);
+            tvIboard = v.findViewById(R.id.tvIboard);
+            tvTitle = v.findViewById(R.id.tvTitle);
+            tvWriter = v.findViewById(R.id.tvWriter);
+            tvRdt = v.findViewById(R.id.tvRdt);
+        }
+
+        public void setItem(BoardVO param) {
+
+        }
     }
 }

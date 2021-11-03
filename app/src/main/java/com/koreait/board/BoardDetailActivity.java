@@ -38,7 +38,11 @@ public class BoardDetailActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         iboard = intent.getIntExtra("iboard", 0);
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
         getBoardDetail();
     }
 

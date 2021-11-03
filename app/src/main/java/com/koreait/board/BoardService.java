@@ -8,7 +8,6 @@ import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface BoardService {
-
     @POST("ins")
     Call<Void> insBoard(@Body BoardVO param);
 
@@ -17,6 +16,9 @@ public interface BoardService {
 
     @GET("sel")
     Call<BoardVO> selBoardDetail(@Query("iboard") int iboard);
+
+    @POST("upd")
+    Call<Void> updBoard(@Body BoardVO param);
 
     @GET("del")
     Call<Void> delBoard(@Query("iboard") int iboard);

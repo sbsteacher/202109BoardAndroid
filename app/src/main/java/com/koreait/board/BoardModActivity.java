@@ -61,6 +61,32 @@ public class BoardModActivity extends AppCompatActivity {
     }
 
     public void clkReg(View v) {
+        String title = etTitle.getText().toString();
+        String ctnt = etCtnt.getText().toString();
+        String writer = etWriter.getText().toString();
+
+        BoardVO data = new BoardVO();
+        data.setIboard(iboard);
+        data.setTitle(title);
+        data.setCtnt(ctnt);
+        data.setWriter(writer);
+
+        Call<Void> call = service.updBoard(data);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> res) {
+                if(res.isSuccessful()) {
+                    finish();
+                } else {
+                    Log.e("myLog", "통신 에러");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.e("myLog", "통신 자체 실패");
+            }
+        });
 
     }
 }

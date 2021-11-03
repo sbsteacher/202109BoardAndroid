@@ -65,6 +65,13 @@ public class BoardDetailActivity extends AppCompatActivity {
         });
     }
 
+    public void clkMod(View v) {
+        // TODO BoardModActivity 화면으로 이동 (with iboard값도 넘긴다.)
+        Intent intent = new Intent(this, BoardModActivity.class);
+        intent.putExtra("aaaaa", iboard);
+        startActivity(intent);
+    }
+
     public void clkDel(View v) {
         AlertDialog.Builder ad = new AlertDialog.Builder(this)
                 .setTitle("삭제")

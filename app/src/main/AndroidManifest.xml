@@ -13,11 +13,14 @@
         android:theme="@style/Theme.Board"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".BoardModActivity"
+            android:exported="false" />
+        <activity
             android:name=".BoardDetailActivity"
             android:exported="false" />
         <activity
             android:name=".BoardWriteActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".BoardListActivity"
             android:exported="true">

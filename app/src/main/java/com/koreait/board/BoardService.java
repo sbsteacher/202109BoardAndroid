@@ -16,5 +16,8 @@ public interface BoardService {
     Call<List<BoardVO>> selBoardList();
 
     @GET("sel")
-    Call<BoardVO> selBoardDetail(@Query("iboard") int edededed);
+    Call<BoardVO> selBoardDetail(@Query("iboard") int iboard);
+
+    @GET("del")
+    Call<Void> delBoard(@Query("iboard") int iboard);
 }

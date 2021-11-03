@@ -1,10 +1,13 @@
 package com.koreait.board;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import retrofit2.Call;
@@ -18,6 +21,7 @@ public class BoardDetailActivity extends AppCompatActivity {
     private TextView tvWriter;
     private TextView tvRdt;
     private BoardService service;
+    private int iboard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,11 +37,12 @@ public class BoardDetailActivity extends AppCompatActivity {
         service = rf.create(BoardService.class);
 
         Intent intent = getIntent();
-        int iboard = intent.getIntExtra("iboard", 0);
-        getBoardDetail(iboard);
+        iboard = intent.getIntExtra("iboard", 0);
+
+        getBoardDetail();
     }
 
-    private void getBoardDetail(int iboard) {
+    private void getBoardDetail() {
         Call<BoardVO> call = service.selBoardDetail(iboard);
         call.enqueue(new Callback<BoardVO>() {
             @Override
@@ -58,5 +63,38 @@ public class BoardDetailActivity extends AppCompatActivity {
                 Log.e("myLog", "통신 자체 실패");
             }
         });
+    }
+
+    public void clkDel(View v) {
+        AlertDialog.Builder ad = new AlertDialog.Builder(this)
+                .setTitle("삭제")
+                .setMessage("정말 삭제하시겠습니까?")
+                .setPositiveButton("예", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Log.i("myLog", "del-iboard : " + iboard);
+
+                        Call<Void> call = service.delBoard(iboard);
+                        call.enqueue(new Callback<Void>() {
+                            @Override
+                            public void onResponse(Call<Void> call, Response<Void> res) {
+                                if(res.isSuccessful()) {
+                                    Log.i("myLog", "통신 성공");
+                                    finish();
+                                } else {
+                                    Log.e("myLog", "통신 오류");
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<Void> call, Throwable t) {
+                                Log.e("myLog", "통신 자체 실패");
+                            }
+                        });
+
+                    }
+                })
+                .setNegativeButton("아니오", null);
+        ad.create().show();
     }
 }

@@ -90,6 +90,15 @@ class BoardListAdapter extends RecyclerView.Adapter<BoardListAdapter.MyViewHolde
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         BoardVO vo = list.get(position);
         holder.setItem(vo);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.i("myLog", "iboard : " + vo.getIboard());
+
+                Intent intent = new Intent(view.getContext(), BoardDetailActivity.class);
+                view.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -119,3 +128,4 @@ class BoardListAdapter extends RecyclerView.Adapter<BoardListAdapter.MyViewHolde
         }
     }
 }
+

@@ -42,8 +42,11 @@ public class BoardDetailActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<BoardVO> call, Response<BoardVO> res) {
                 if(res.isSuccessful()) {
-                    // TODO 구현하시오~
-
+                    BoardVO vo = res.body();
+                    tvTitle.setText(vo.getTitle());
+                    tvCtnt.setText(vo.getCtnt());
+                    tvWriter.setText(vo.getWriter());
+                    tvRdt.setText(vo.getRdt());
                 } else {
                     Log.e("myLog", "통신 오류");
                 }

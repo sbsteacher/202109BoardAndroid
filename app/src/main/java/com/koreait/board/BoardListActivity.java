@@ -96,6 +96,7 @@ class BoardListAdapter extends RecyclerView.Adapter<BoardListAdapter.MyViewHolde
                 Log.i("myLog", "iboard : " + vo.getIboard());
 
                 Intent intent = new Intent(view.getContext(), BoardDetailActivity.class);
+                intent.putExtra("iboard", vo.getIboard());
                 view.getContext().startActivity(intent);
             }
         });

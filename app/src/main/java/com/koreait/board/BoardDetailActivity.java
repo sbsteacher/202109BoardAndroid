@@ -2,6 +2,7 @@ package com.koreait.board;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
@@ -31,8 +32,8 @@ public class BoardDetailActivity extends AppCompatActivity {
         Retrofit rf = RetroFitObj.getInstance();
         service = rf.create(BoardService.class);
 
-        // TODO iboard값 전달받기
-        int iboard = 16;
+        Intent intent = getIntent();
+        int iboard = intent.getIntExtra("iboard", 0);
         getBoardDetail(iboard);
     }
 

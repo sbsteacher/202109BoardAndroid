@@ -30,7 +30,11 @@ public class BoardListActivity extends AppCompatActivity {
 
         rvList = findViewById(R.id.rvList);
         rvList.setAdapter(adapter);
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
         getBoardList();
     }
 

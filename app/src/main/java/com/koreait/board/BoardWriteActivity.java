@@ -49,6 +49,7 @@ public class BoardWriteActivity extends AppCompatActivity {
             public void onResponse(Call<Void> call, Response<Void> res) {
                 if(res.isSuccessful()) {
                     Log.i("myLog", "통신 성공");
+                    finish();
                 } else {
                     Log.i("myLog", "통신 오류");
                 }

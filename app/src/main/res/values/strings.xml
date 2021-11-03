@@ -4,4 +4,7 @@
     <string name="title">제목</string>
     <string name="ctnt">내용</string>
     <string name="writer">작성자</string>
+    <string name="rdt">작성일시</string>
+    <string name="mod">수정</string>
+    <string name="del">삭제</string>
 </resources>
